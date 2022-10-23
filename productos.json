@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ac/Dc",
+    "precio": 8000,
+    "img": "/img/ac_cd.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Iron Maiden",
+    "precio": 7000,
+    "img": "/img/iron_maiden.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Pink Floyd",
+    "precio": 9000,
+    "img": "/img/pink_floyd.jpg"
+  }
+]
