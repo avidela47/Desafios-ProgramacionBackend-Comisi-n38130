@@ -30,7 +30,7 @@ app.get('/productos', (request, response) => {
 app.get('/random', (request, response) => {
     const ejecutar = async () => {
         const arrayProductos = await productos.getAll();
-        let numero = Math.floor(Math.random() * arrayProductos.length);
+        let numero = Math.floor(Math.random() * arrayProductos.length);                                                                                                                                                                                                                                         
         const producto = await productos.getById(numero + 1);
         let contenedor = `<div style="background-color: RebeccaPurple; color: white; text-align: center; height: auto; width: 300px"><h2>Artista: ${producto[0].nombre}</h2> <h3>Precio: $ ${producto[0].precio}</h3> <img style="margin-bottom: 10px"height="250px" src="${producto[0].img}"></div>`;
         response.send(

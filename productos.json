@@ -3,18 +3,18 @@
     "id": 1,
     "nombre": "Ac/Dc",
     "precio": 8000,
-    "img": "/img/ac_cd.jpg"
+    "img": "https://i.pinimg.com/originals/7a/64/6f/7a646fe7d128502dd8bc595ed15a08fa.jpg"
   },
   {
     "id": 2,
     "nombre": "Iron Maiden",
     "precio": 7000,
-    "img": "/img/iron_maiden.jpg"
+    "img": "https://opiamagazine.com/wp-content/uploads/2020/10/Iron-Maiden-Night-of-the-dead.png"
   },
   {
     "id": 3,
     "nombre": "Pink Floyd",
     "precio": 9000,
-    "img": "/img/pink_floyd.jpg"
+    "img": "https://i.pinimg.com/564x/69/95/48/6995486bed649c0d1f589c9be4c723a2.jpg"
   }
 ]
