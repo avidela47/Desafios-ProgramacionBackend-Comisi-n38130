@@ -4,7 +4,11 @@
 
 ### Proyecto: BlackBook Records
 
-#### ### Ejecutar programa
+#### Configuracion
+
+Hacer npm install para instalar las dependencias
+
+#### Ejecutar programa
 
 Hacer en la consola:
 
