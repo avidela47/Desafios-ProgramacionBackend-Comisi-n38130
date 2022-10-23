@@ -2,18 +2,24 @@
   {
     "id": 1,
     "nombre": "Ac/Dc",
+    "album": "Black Ice",
+    "año": 2008,
     "precio": 8000,
     "img": "https://i.pinimg.com/originals/7a/64/6f/7a646fe7d128502dd8bc595ed15a08fa.jpg"
   },
   {
     "id": 2,
     "nombre": "Iron Maiden",
+    "album": "The Trooper",
+    "año": 1995,
     "precio": 7000,
-    "img": "https://opiamagazine.com/wp-content/uploads/2020/10/Iron-Maiden-Night-of-the-dead.png"
+    "img": "https://i.pinimg.com/originals/e8/09/a4/e809a47a8c3988ff5074861ba62ec52e.jpg"
   },
   {
     "id": 3,
     "nombre": "Pink Floyd",
+    "album": "The Division Bell",
+    "año": 1994,
     "precio": 9000,
     "img": "https://i.pinimg.com/564x/69/95/48/6995486bed649c0d1f589c9be4c723a2.jpg"
   }
