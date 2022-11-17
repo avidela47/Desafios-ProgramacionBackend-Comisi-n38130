@@ -1,12 +1,12 @@
-<style>
-
 body {
   align-items: center;
   color: white;
   display: flex;
   justify-content: center;
   height: 100vh;
-  font-family: "Neuton"; background-image: url(https://static1.elcomercio.es/www/pre2017/multimedia/RC/201704/25/media/cortadas/industria-discografica-krEG-U213724905522SxF-660x371@RC.jpg); background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Neuton"; background-image: url(https://static.vecteezy.com/system/resources/previews/000/540/124/non_2x/colorful-vinyl-records-with-yellow-background-vector-illustration.jpg);
 }
 
 .form {
@@ -16,6 +16,7 @@ body {
   height: 550px;
   padding: 20px;
   width: 320px;
+  margin-top: 70px;
 }
 
 .title {
@@ -63,7 +64,6 @@ body {
 }
 
 .cut {
-  background-color: #15172b;
   border-radius: 10px;
   height: 20px;
   left: 20px;
@@ -87,7 +87,7 @@ body {
   color: #65657b;
   font-family: sans-serif;
   left: 20px;
-  line-height: 14px;
+  line-height: 1px;
   pointer-events: none;
   position: absolute;
   transform-origin: 0 50%;
@@ -127,35 +127,50 @@ body {
   background-color: #06b;
 }
 
-.img1 {
-  height: 100px;
-  width: 100px;
-  padding: 5px;
-}
-
+.img {
+    height: 100px;
+    width: 100px;
+    padding: 5px;
+  }
+  
 .h2{
-  color: #eee;
-  font-family: "Neuton";
-  font-size: 25px;
-  font-weight: 600;
-  margin-top: -500px;
-  text-align: center;
-  background-color: #085024;
+    color: #eee;
+    font-family: "Neuton";
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: -480px;
+    text-align:start;
+    margin-left: 50px;
 }
 
-.h3{
-  color: #eee;
-  font-family: "Neuton";
-  font-size: 25px;
-  font-weight: 600;
-  margin-top: -400px;
-  text-align: center;
-  border: solid 1px black;
+#productos{
+  display: inline-block;
+  height: 550px;
+  padding: 20px;
+  width: 320px;
 }
 
-table{
-  text-align: center;
-  
-  
+.productos{
+  margin-left: 500px;
+  margin-top: -550px;
 }
-</style>
+
+.h1{
+  color: white;
+  margin-top: 450px;
+  text-align: center;
+}
+
+.th{
+  padding: 20px;
+  font-family: "Neuton";
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.email{
+  color: blue;
+  font-weight: bold;
+}
+

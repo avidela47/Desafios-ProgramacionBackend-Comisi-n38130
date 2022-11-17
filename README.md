@@ -1,8 +1,6 @@
-# Quinto desafio
+# Sexto desafio
 
-## Tema: Motores de plantillas
-
-### Motor de plantilla preferido: ejs (me resulta mas facil de realizar el codigo y agregar otras librerias)
+## Tema: WEBSOCKETS
 
 ### Proyecto: BlackBook Records
 

@@ -3,7 +3,6 @@ class Contenedor {
         this.productos = productos;
     }
 
-
   save(producto) {
 
     if (producto.id) {
@@ -64,16 +63,3 @@ class Contenedor {
 }
 
 module.exports = Contenedor;
-
-
-
-
-
-
-
-
-
-
-
-
-
