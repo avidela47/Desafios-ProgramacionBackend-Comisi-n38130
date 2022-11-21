@@ -51,6 +51,6 @@ io.on('connection', async (socket) => {
       data.time = moment(new Date()).format('DD/MM/YYYY HH:MM:SS');
       await mensajes.save(data);
       const listaMensajes = await mensajes.getAll();
-      io.sockets.emit('messages', mensajes);
+      io.sockets.emit('messages', listaMensajes);
   });
 });
