@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "nombre": "Ac/Dc",
+    "descripcion": "Black Ice",
+    "timestamp": 1669088248641,
+    "codigo": "1234567890",
+    "precio": 8000,
+    "stock": 10,
+    "foto": "https://i.pinimg.com/originals/7a/64/6f/7a646fe7d128502dd8bc595ed15a08fa.jpg"
+  }
+]

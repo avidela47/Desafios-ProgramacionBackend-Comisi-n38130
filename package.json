@@ -1,11 +1,13 @@
 {
   "name": "handlebars",
   "version": "1.0.0",
-  "description": "",
+  "description": "Primera entrega del proyecto de backend",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/main.js"
+    "start": "nodemon src/main.js",
+    "dev": "nodemon node main.js"
   },
   "author": "Ariel Videla",
   "license": "ISC",

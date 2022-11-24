@@ -1,6 +1,6 @@
-# Sexto desafio
+# Primera entrega del proyecto final
 
-## Tema: WEBSOCKETS
+## Tema: Aplicación eCommerce Backend
 
 ### Proyecto: BlackBook Records
 

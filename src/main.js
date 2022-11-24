@@ -1,56 +1,47 @@
-const express = require('express');
-const moment = require('moment');
-const Contenedor = require("./contenedor/contenedorFs");
-const { Server: HttpServer } = require('http');
-const { Server: IOServer } = require('socket.io');
+// Servidor
+import express from 'express';
+
+// Importar rutas
+import { rutaProducto } from './routes/productos.js';
+import { rutaCarrito } from './routes/carrito.js';
+import { Contenedor } from './db/db.js';
+const productos = new Contenedor('src/db/productos.json');
 
 const app = express();
-const productos = new Contenedor('./src/db/productos.txt');
-const mensajes = new Contenedor('./src/db/mensajes.txt');
-
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const publicRoot = './public';
 
+// Lineas para usar json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-const httpServer = new HttpServer(app);
-const io = new IOServer(httpServer);
 
 // Hacemos la carpeta public visible
 app.use(express.static(publicRoot));
 
-app.get('/', (req, res) => {
-    res.send('index.html', { root:publicRoot });
-  });
+// Implemantar ruta
+app.use('/api/productos', rutaProducto);
+app.use('/api/carrito', rutaCarrito);
 
-  
-const server = httpServer.listen(PORT, () => {
-    console.log(`Servidor escuchando: ${server.address().port}`);
-  });
-  
-  server.on('error', error => console.log(`Error: ${error}`));
-
-io.on('connection', async (socket) => {
-  console.log('Nuevo cliente conctado!');
-
-  const listaProductos = await productos.getAll();
-  socket.emit('nueva-conexion', listaProductos);
-
-  socket.on('new-product', (data) => {
-    productos.save(data);
-    io.sockets.emit('producto', data);
-  });
-
-  // Para enviar todos los mensajes en la primera conexion
-  const listaMensajes = await mensajes.getAll();
-  socket.emit('messages', listaMensajes);
-
-  // Evento para recibir nuevos mensajes
-  socket.on('new-message', async data => {
-      data.time = moment(new Date()).format('DD/MM/YYYY HH:MM:SS');
-      await mensajes.save(data);
-      const listaMensajes = await mensajes.getAll();
-      io.sockets.emit('messages', listaMensajes);
-  });
+app.get("/", async (req, res) => {
+  console.log(`get req recibida con exito`);
+  res.send('index.html', { root:publicRoot });
 });
+
+// Midleware de rutas no implementadas
+app.use((req, res, next) => {
+  if (!req.route) {
+    res.status(404).send({ error : -2, descripcion: `ruta ${req.url} no encontrada` });
+  } else {
+    next();
+  }
+})
+
+// Server
+const server = app.listen(PORT, () => {
+  console.log(`Servidor escuchando: ${server.address().port}`);
+  console.log(`http://localhost:${server.address().port}`);
+});
+  
+
+server.on('error', error => console.log(`Error: ${error}`));
+
