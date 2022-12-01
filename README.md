@@ -1,6 +1,6 @@
-# Primera entrega del proyecto final
+# Octavo desafio
 
-## Tema: Aplicación eCommerce Backend
+## Tema: NUESTRA PRIMERA BASE DE DATOS
 
 ### Proyecto: BlackBook Records
 
