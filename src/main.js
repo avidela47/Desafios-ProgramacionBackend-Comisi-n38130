@@ -90,8 +90,9 @@ io.on('connection', async (socket) => {
     if (!exists) {
       connectionSqlite3.schema.createTable('mensajes', (table) => {
         table.increments('id').primary
-        table.string('email', 40).notNulltable()
-        table.string('texto', 100).notNulltable()
+        table.string('texto', 100).notNullable()
+        table.string('email', 100).notNullable()
+        table.string('time', 100).notNullable()
       }).then(() => console.log('Tabla creada con exito'))
         .catch((err) => console.log(err));
     }
