@@ -1,6 +1,6 @@
-# Octavo desafio
+# SEGUNDA ENTREGA DEL PROYECTO FINAL
 
-## Tema: NUESTRA PRIMERA BASE DE DATOS
+## Tema: CRUD en MongoDb y en Firebase.
 
 ### Proyecto: BlackBook Records
 
