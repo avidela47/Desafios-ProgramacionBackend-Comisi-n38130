@@ -2,7 +2,6 @@
 import express from 'express';
 // import { Contenedor } from '../contenedor/contenedorFs.js';
 import ContenedorCarritos from '../daos/carritos/carritosDaoMongoDb.js';
-import ContenedorProductos from '../daos/productos/productosDaoMongoDb.js';
 const rutaCarrito = express.Router();
 const carritos = new ContenedorCarritos('');
 // const productos = new ContenedorProductos('');

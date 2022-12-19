@@ -21,12 +21,16 @@ const privilegio = (req, res, next) => {
     res.json(listaProductos);
   });
   
-  rutaProducto.get('/:id', (req, res) => {
-  
+  rutaProducto.get('/:id', async (req, res) => {
+    const {id} = req.body
+    const producto = await productos.getById(id);
+    res.json(producto);
   });
   
-  rutaProducto.post('/', privilegio, (req, res) => {
-    
+  rutaProducto.post('/', privilegio, async (req, res) => {
+    const producto =  req.body
+    const id = await productos.save(producto);
+    res.json(id);
   });
   
   rutaProducto.put('/:id', privilegio, async (req, res) => {
@@ -36,8 +40,12 @@ const privilegio = (req, res, next) => {
     res.json(producto);
   });
   
-  rutaProducto.delete('/:id', privilegio, (req, res) => {
-    
+  rutaProducto.delete('/:id', privilegio,  async (req, res) => {
+    const idProducto = parseInt(req.params.id);
+    await productos.deleteById(idProducto);
+    res.json({
+        status: 'producto eliminado'
+    });
   });
   
   export { rutaProducto };
