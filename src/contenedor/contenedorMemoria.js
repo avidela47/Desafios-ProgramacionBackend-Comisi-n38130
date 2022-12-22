@@ -1,4 +1,4 @@
-export class Contenedor {
+class ContenedorMemoria {
     constructor(productos) {
         this.productos = productos;
     }
@@ -11,7 +11,7 @@ export class Contenedor {
     }
 
     let id = 1;
-    this.productos.forEach((producto, index) => {
+    this.productos.forEach((producto) => {
       if (producto.id >= id) {
         id = producto.id + 1;
       }
@@ -61,3 +61,5 @@ export class Contenedor {
     this.productos = [];
   }
 }
+
+module.exports = ContenedorMemoria;

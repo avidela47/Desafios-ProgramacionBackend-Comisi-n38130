@@ -1,6 +1,6 @@
 const knex = require('knex');
 
-class Contenedor {
+class ContenedorSql {
   constructor(options, table) {
     this.connection = knex(options);
     this.table = table;
@@ -26,4 +26,4 @@ class Contenedor {
   }
 }
 
-module.exports = Contenedor;
+module.exports = ContenedorSql;

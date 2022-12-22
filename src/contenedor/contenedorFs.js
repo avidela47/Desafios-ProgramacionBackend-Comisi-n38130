@@ -1,6 +1,6 @@
-import * as fs from 'fs';
+const fs = require('fs');
 
-export class Contenedor {
+class ContenedorFs {
   constructor(nombre) {
     this.nombre = nombre;
   }
@@ -50,28 +50,11 @@ export class Contenedor {
       archivoParseado.splice(indexSeleccionado, 1);
       await fs.promises.writeFile(this.nombre, JSON.stringify(archivoParseado, null, 2));
     }
-
   }
-
-  async update(id, objeto) {
-    const archivo = await fs.promises.readFile(this.nombre, 'utf-8');
-    const archivoParseado = JSON.parse(archivo);
-    let posicion = -1;
-    archivoParseado.forEach((producto, indice) => {
-      if (producto.id == id) {
-        posicion = indice;
-      }
-    });
-    objeto.id = id;
-    if (posicion => 0) {
-      archivoParseado[posicion] = objeto;
-      await fs.promises.writeFile(this.nombre, JSON.stringify(archivoParseado, null, 2));
-      return objeto.id;
-    }
-  }
-
   async deleteAll() {
     const arregloVacio = [];
     await fs.promises.writeFile(this.nombre, JSON.stringify(arregloVacio, null, 2));
   }
 }
+
+module.exports = ContenedorFs;

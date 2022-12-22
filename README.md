@@ -1,6 +1,6 @@
-# SEGUNDA ENTREGA DEL PROYECTO FINAL
+# Desafio Once
 
-## Tema: CRUD en MongoDb y en Firebase.
+## Tema: MOCKS y NORMALIZACION
 
 ### Proyecto: BlackBook Records
 
