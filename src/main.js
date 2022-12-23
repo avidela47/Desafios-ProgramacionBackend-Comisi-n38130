@@ -74,13 +74,15 @@ io.on('connection', async (socket) => {
   });
 
   // Para enviar todos los mensajes en la primera conexion
-  socket.emit('mensajes', await obtenerMensajesNormalizados())
+  const listaMensajes = await mensajes.getAll();
+  socket.emit('mensajes', listaMensajes);
 
   // Evento para recibir nuevos mensajes
   socket.on('new-message', async data => {
     data.time = moment(new Date()).format('DD/MM/YYYY hh:mm:ss');
     await mensajes.save(data);
-    io.sockets.emit('mensajes', await obtenerMensajesNormalizados());
+    const listaMensajes = await mensajes.getAll();
+    io.sockets.emit('mensajes', listaMensajes);
   });
   socket.on('disconnect', () => {
     console.log('Usuario desconectado')
@@ -93,7 +95,7 @@ io.on('connection', async (socket) => {
     if (!exists) {
       connectionMysql.schema.createTable('productos', (table) => {
         table.increments('id').primary
-        table.string('nombre', 25).notNulltable()
+        table.string('nombre', 25).notNullable()
         table.float('precio')
         table.string('img', 100)
       }).then(() => console.log('Tabla creada con exito'))

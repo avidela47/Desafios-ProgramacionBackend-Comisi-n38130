@@ -51,47 +51,32 @@ function addProduct(e) {
 }
 
 // Mensajes
-// Definicion de esquemas
 
-const autorSchema = new normalizr.schema.Entity('autor', {}, { idAttribute: 'email' });
+const mensaje = {
+    autor: {
+        email: document.getElementById('inputEmail').value,
+        nombre: document.getElementById('inputNombre').value,
+        apellido: document.getElementById('inputApellido').value,
+        edad: document.getElementById('inputEdad').value,
+        alias: document.getElementById('inputAlias').value,
+        avatar: document.getElementById('inputAvatar').value,
+    },
+    texto: document.getElementById('inputMensaje').value
+}
+socket.emit('new-message', mensaje);
+formPublicarMensaje.reset()
+inputMensaje.focus()
 
-const mensajeSchema = new normalizr.schema.Entity('post', {
-    autor: autorSchema
-}, { idAttribute: 'id' });
 
-const mensajesSchema = new normalizr.schema.Entity('posts', {
-    mensajes: [mensajeSchema]
-}, { idAttribute: 'id' });
+socket.on('mensajes', mensajes => {
 
-const formPublicarMensaje = document.getElementById('formPublicarMensaje')
-formPublicarMensaje.addEventListener('submit', e => {
-    e.preventDefault()
-
-    const mensaje = {
-        autor: {
-            email: document.getElementById('inputEmail').value,
-            nombre: document.getElementById('inputNombre').value,
-            apellido: document.getElementById('inputApellido').value,
-            edad: document.getElementById('inputEdad').value,
-            alias: document.getElementById('inputAlias').value,
-            avatar: document.getElementById('inputAvatar').value,
-        },
-        texto: document.getElementById('inputMensaje').value
-    }
-    socket.emit('new-message', mensaje);
-    formPublicarMensaje.reset()
-    inputMensaje.focus()
-})
-
-socket.on('mensaje', mensajes => {
-    
     const tamanioNormalizado = JSON.stringify(mensajes).length;
 
-    const mensajesDesnormalizados = normalizr.denormalize(mensajes.result, mensajesSchema, mensajes.entities);
+    const mensajesDesnormalizados = normalize.denormalize(mensajes.result, mensajesSchema, mensajes.entities);
 
     const tamanioDesnormalizado = JSON.stringify(mensajesDesnormalizados).length;
 
-    const porcentaje = parseInt((tamanioNormalizado * 100)/tamanioDesnormalizado);
+    const porcentaje = parseInt((tamanioNormalizado * 100) / tamanioDesnormalizado);
     document.getElementById("compresion").innerText = porcentaje || 0;
     // console.log(porcentaje);
     const html = makeHtmlList(mensajesDesnormalizados?.mensajes)
