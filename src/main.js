@@ -74,15 +74,14 @@ io.on('connection', async (socket) => {
   });
 
   // Para enviar todos los mensajes en la primera conexion
-  const listaMensajes = await mensajes.getAll();
-  socket.emit('mensajes', listaMensajes);
+  socket.emit('mensajes', await obtenerMensajesNormalizados());
 
   // Evento para recibir nuevos mensajes
   socket.on('new-message', async data => {
     data.time = moment(new Date()).format('DD/MM/YYYY hh:mm:ss');
     await mensajes.save(data);
-    const listaMensajes = await mensajes.getAll();
-    io.sockets.emit('mensajes', listaMensajes);
+    const mensajes = await mensajes.getAll();
+    io.sockets.emit('mensajes', await obtenerMensajesNormalizados());
   });
   socket.on('disconnect', () => {
     console.log('Usuario desconectado')

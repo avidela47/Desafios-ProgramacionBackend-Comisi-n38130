@@ -52,57 +52,64 @@ function addProduct(e) {
 
 // Mensajes
 
-const mensaje = {
-    autor: {
-        email: document.getElementById('inputEmail').value,
-        nombre: document.getElementById('inputNombre').value,
-        apellido: document.getElementById('inputApellido').value,
-        edad: document.getElementById('inputEdad').value,
-        alias: document.getElementById('inputAlias').value,
-        avatar: document.getElementById('inputAvatar').value,
-    },
-    texto: document.getElementById('inputMensaje').value
-}
-socket.emit('new-message', mensaje);
-formPublicarMensaje.reset()
-inputMensaje.focus()
+const btnEnviar = document.getElementById('btnEnviar')
+
+const formPublicarMensaje = document.getElementById('formPublicarMensaje')
+formPublicarMensaje.addEventListener('submit', e => {
+    e.preventDefault()
+
+    const mensaje = {
+        autor: {
+            email: document.getElementById('inputEmail').value,
+            nombre: document.getElementById('inputNombre').value,
+            apellido: document.getElementById('inputApellido').value,
+            edad: document.getElementById('inputEdad').value,
+            alias: document.getElementById('inputAlias').value,
+            avatar: document.getElementById('inputAvatar').value,
+        },
+        texto: document.getElementById('inputMensaje').value
+    }
+    socket.emit('new-message', mensaje);
+    formPublicarMensaje.reset()
+    inputMensaje.focus()
 
 
-socket.on('mensajes', mensajes => {
+    socket.on('mensajes', mensajes => {
 
-    const tamanioNormalizado = JSON.stringify(mensajes).length;
+        const tamanioNormalizado = JSON.stringify(mensajes).length;
 
-    const mensajesDesnormalizados = normalize.denormalize(mensajes.result, mensajesSchema, mensajes.entities);
+        const mensajesDesnormalizados = normalize.denormalize(mensajes.result, mensajesSchema, mensajes.entities);
 
-    const tamanioDesnormalizado = JSON.stringify(mensajesDesnormalizados).length;
+        const tamanioDesnormalizado = JSON.stringify(mensajesDesnormalizados).length;
 
-    const porcentaje = parseInt((tamanioNormalizado * 100) / tamanioDesnormalizado);
-    document.getElementById("compresion").innerText = porcentaje || 0;
-    // console.log(porcentaje);
-    const html = makeHtmlList(mensajesDesnormalizados?.mensajes)
-    document.getElementById('mensajes').innerHTML = html;
-})
+        const porcentaje = parseInt((tamanioNormalizado * 100) / tamanioDesnormalizado);
+        document.getElementById("compresion").innerText = porcentaje || 0;
+        // console.log(porcentaje);
+        const html = makeHtmlList(mensajesDesnormalizados?.mensajes)
+        document.getElementById('mensajes').innerHTML = html;
+    })
 
-function makeHtmlList(mensajes) {
-    return mensajes.map(mensaje => {
-        return (`
+    function makeHtmlList(mensajes) {
+        return mensajes.map(mensaje => {
+            return (`
             <div>
                 <b style="color:blue;">${mensaje.autor.email}</b>
                 [<span style="color:brown;">${mensaje.fyh}</span>] :
                 <i style="color:green;">${mensaje.texto}</i>
             </div>
         `)
-    }).join(" ");
-}
+        }).join(" ");
+    }
 
-inputEmail.addEventListener('input', () => {
-    const hayEmail = inputEmail.value.length
-    const hayTexto = inputMensaje.value.length
-    inputMensaje.disabled = !hayEmail
-    btnEnviar.disabled = !hayEmail || !hayTexto
-})
+    inputEmail.addEventListener('input', () => {
+        const hayEmail = inputEmail.value.length
+        const hayTexto = inputMensaje.value.length
+        inputMensaje.disabled = !hayEmail
+        btnEnviar.disabled = !hayEmail || !hayTexto
+    })
 
-inputMensaje.addEventListener('input', () => {
-    const hayTexto = inputMensaje.value.length
-    btnEnviar.disabled = !hayTexto
+    inputMensaje.addEventListener('input', () => {
+        const hayTexto = inputMensaje.value.length
+        btnEnviar.disabled = !hayTexto
+    })
 })
