@@ -1,4 +1,4 @@
-const knex = require('knex');
+import knex from 'knex';
 
 class ContenedorSql {
   constructor(options, table) {
@@ -26,4 +26,4 @@ class ContenedorSql {
   }
 }
 
-module.exports = ContenedorSql;
+export default ContenedorSql

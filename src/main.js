@@ -1,24 +1,25 @@
 // Expres / Moment
-const express = require('express');
+import express from 'express';
 const app = express();
-const moment = require('moment');
-const faker = require ('faker');
+import moment from 'moment';
+import faker from 'faker'
 faker.locale = 'es';
+import { normalize, schema } from 'normalizr';
 
 //Socket / Http
-const { Server: IOServer } = require('socket.io');
-const { Server: HttpServer } = require('http');
+import { Server as IOServer } from 'socket.io';
+import { Server as HttpServer } from 'http';
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
 //Sql
-const options = require('./connection/options.js');
-const knex = require('knex');
+import options from './connection/options.js';
+import knex from 'knex';
 const connectionMysql = knex(options.mysql);
 const connectionSqlite3 = knex(options.sqlite3);
 
 // Contenedor
-const ContenedorSql = require('./contenedor/contenedorSql');
+import ContenedorSql from './contenedor/contenedorSql.js';
 const productos = new ContenedorSql(options.mysql, 'productos');
 const mensajes = new ContenedorSql(options.sqlite3, 'mensajes');
 
@@ -118,7 +119,7 @@ io.on('connection', async (socket) => {
     }
   });
 
-  // Definicion de esquemas
+// Definicion de esquemas
 
 const autorSchema = new schema.Entity('autor', {}, { idAttribute: 'email' });
 
@@ -133,7 +134,7 @@ const mensajesSchema = new schema.Entity('posts', {
 // Funciones custom
 
 const obtenerMensajesNormalizados = async () => {
-    const arregloMensajes = await mensajes.listarAll();
+    const arregloMensajes = await mensajes.getAll();
     return normalize({
         id: 'mensajes',
         mensajes: arregloMensajes,
