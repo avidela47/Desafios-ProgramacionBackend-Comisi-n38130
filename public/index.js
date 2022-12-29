@@ -52,6 +52,19 @@ function addProduct(e) {
 
 // Mensajes
 
+/* --------------------- DESNORMALIZACIÓN DE MENSAJES ---------------------------- */
+// Definimos un esquema de autor
+const schemaAuthor = new normalizr.schema.Entity('author', {}, { idAttribute: 'id' });
+
+// Definimos un esquema de mensaje
+const schemaMensaje = new normalizr.schema.Entity('post', { author: schemaAuthor }, { idAttribute: '_id' })
+
+// Definimos un esquema de posts
+const schemaMensajes = new normalizr.schema.Entity('posts', { mensajes: [schemaMensaje] }, { idAttribute: 'id' })
+/* ----------------------------------------------------------------------------- */
+
+const inputUsername = document.getElementById('username')
+const inputMensaje = document.getElementById('inputMensaje')
 const btnEnviar = document.getElementById('btnEnviar')
 
 const formPublicarMensaje = document.getElementById('formPublicarMensaje')
@@ -59,57 +72,62 @@ formPublicarMensaje.addEventListener('submit', e => {
     e.preventDefault()
 
     const mensaje = {
-        autor: {
-            email: document.getElementById('inputEmail').value,
-            nombre: document.getElementById('inputNombre').value,
-            apellido: document.getElementById('inputApellido').value,
-            edad: document.getElementById('inputEdad').value,
-            alias: document.getElementById('inputAlias').value,
-            avatar: document.getElementById('inputAvatar').value,
+        author: {
+            email: inputUsername.value,
+            nombre: document.getElementById('nombre').value,
+            apellido: document.getElementById('apellido').value,
+            edad: document.getElementById('edad').value,
+            alias: document.getElementById('alias').value,
+            avatar: document.getElementById('avatar').value
         },
-        texto: document.getElementById('inputMensaje').value
+        text: inputMensaje.value
     }
-    socket.emit('new-message', mensaje);
+
+    socket.emit('nuevoMensaje', mensaje);
     formPublicarMensaje.reset()
     inputMensaje.focus()
+})
 
+socket.on('mensajes', mensajesN => {
 
-    socket.on('mensajes', mensajes => {
+    const mensajesNsize = JSON.stringify(mensajesN).length
+    console.log(mensajesN, mensajesNsize);
 
-        const tamanioNormalizado = JSON.stringify(mensajes).length;
+    const mensajesD = normalizr.denormalize(mensajesN.result, schemaMensajes, mensajesN.entities)
 
-        const mensajesDesnormalizados = normalize.denormalize(mensajes.result, mensajesSchema, mensajes.entities);
+    const mensajesDsize = JSON.stringify(mensajesD).length
+    console.log(mensajesD, mensajesDsize);
 
-        const tamanioDesnormalizado = JSON.stringify(mensajesDesnormalizados).length;
+    const porcentajeC = parseInt((mensajesNsize * 100) / mensajesDsize)
+    console.log(`Porcentaje de compresión ${porcentajeC}%`)
+    document.getElementById('compresion-info').innerText = porcentajeC
 
-        const porcentaje = parseInt((tamanioNormalizado * 100) / tamanioDesnormalizado);
-        document.getElementById("compresion").innerText = porcentaje || 0;
-        // console.log(porcentaje);
-        const html = makeHtmlList(mensajesDesnormalizados?.mensajes)
-        document.getElementById('mensajes').innerHTML = html;
-    })
+    console.log(mensajesD.mensajes);
+    const html = makeHtmlList(mensajesD.mensajes)
+    document.getElementById('mensajes').innerHTML = html;
+})
 
-    function makeHtmlList(mensajes) {
-        return mensajes.map(mensaje => {
-            return (`
-            <div>
-                <b style="color:blue;">${mensaje.autor.email}</b>
-                [<span style="color:brown;">${mensaje.fyh}</span>] :
-                <i style="color:green;">${mensaje.texto}</i>
-            </div>
-        `)
-        }).join(" ");
-    }
+function makeHtmlList(mensajes) {
+    return mensajes.map(mensaje => {
+        return (`
+        <div>
+            <b style="color:blue;">${mensaje.author.email}</b>
+            [<span style="color:brown;">${mensaje.fyh}</span>] :
+            <i style="color:green;">${mensaje.text}</i>
+            <img width="50" src="${mensaje.author.avatar}" alt=" ">
+        </div>
+    `)
+    }).join(" ");
+}
 
-    inputEmail.addEventListener('input', () => {
-        const hayEmail = inputEmail.value.length
-        const hayTexto = inputMensaje.value.length
-        inputMensaje.disabled = !hayEmail
-        btnEnviar.disabled = !hayEmail || !hayTexto
-    })
+inputUsername.addEventListener('input', () => {
+    const hayEmail = inputUsername.value.length
+    const hayTexto = inputMensaje.value.length
+    inputMensaje.disabled = !hayEmail
+    btnEnviar.disabled = !hayEmail || !hayTexto
+})
 
-    inputMensaje.addEventListener('input', () => {
-        const hayTexto = inputMensaje.value.length
-        btnEnviar.disabled = !hayTexto
-    })
+inputMensaje.addEventListener('input', () => {
+    const hayTexto = inputMensaje.value.length
+    btnEnviar.disabled = !hayTexto
 })

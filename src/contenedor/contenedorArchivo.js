@@ -42,11 +42,11 @@ class ContenedorArchivo {
         }
     }
 
-    async actualizar(elem, id) {
+    async actualizar(elem) {
         const elems = await this.listarAll()
-        const index = elems.findIndex(e => e.id == id)
+        const index = elems.findIndex(e => e.id == elem.id)
         if (index == -1) {
-            throw new Error(`Error al actualizar: no se encontró el id ${id}`)
+            throw new Error(`Error al actualizar: no se encontró el id ${elem.id}`)
         } else {
             elems[index] = elem
             try {
