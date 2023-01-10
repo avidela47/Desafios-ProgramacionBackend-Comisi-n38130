@@ -10,3 +10,13 @@ label {
 .jumbotron {
     min-height: 100vh;
 }
+
+body {
+    color: rgb(36, 55, 221);
+    display: flex;
+    justify-content: center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: "Neuton";
+    background-image: url(https://static.vecteezy.com/system/resources/previews/000/540/124/non_2x/colorful-vinyl-records-with-yellow-background-vector-illustration.jpg);
+  }
