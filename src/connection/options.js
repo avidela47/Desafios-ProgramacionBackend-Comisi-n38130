@@ -6,7 +6,8 @@ export default {
     },
     mongoRemote: {
         client: 'mongodb',
-        cnxStr: 'mongodb+srv://root:root@cluster0.7yey2qr.mongodb.net/ecommerce?retryWrites=true&w=majority’'
+        //Aqui colocar tus datos de mongo Atlas. 
+        cnxStr: 'mongodb+srv://root:root@cluster0.xqf7lqj.mongodb.net/?retryWrites=true&w=majority'
     },
     sqlite3: {
         client: 'sqlite3',

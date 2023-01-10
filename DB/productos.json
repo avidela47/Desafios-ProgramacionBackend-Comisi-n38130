@@ -28,5 +28,29 @@
     "precio": "7000",
     "img": "https://cdns-images.dzcdn.net/images/cover/bdb5671e51d849226938b3db7f2975ad/264x264.jpg",
     "id": 4
+  },
+  {
+    "title": "hola",
+    "price": "10000",
+    "thumbnail": "https://d2r9epyceweg5n.cloudfront.net/stores/001/930/794/rte/img-fondoqueso-sinboton.jpg",
+    "id": 5
+  },
+  {
+    "title": "hhhhhhhhhhhhhhhhh",
+    "price": "10000",
+    "thumbnail": "https://d2r9epyceweg5n.cloudfront.net/stores/001/930/794/rte/img-fondoqueso-sinboton.jpg",
+    "id": 6
+  },
+  {
+    "title": "papa",
+    "price": "10000",
+    "thumbnail": "https://d2r9epyceweg5n.cloudfront.net/stores/001/930/794/rte/img-fondoqueso-sinboton.jpg",
+    "id": 7
+  },
+  {
+    "title": "Ac/Dc",
+    "price": "8000",
+    "thumbnail": "https://i.pinimg.com/originals/d1/12/aa/d112aa4dcea012815b22fd294f073f33.jpg",
+    "id": 8
   }
 ]
