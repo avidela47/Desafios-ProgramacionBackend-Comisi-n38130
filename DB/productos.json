@@ -52,5 +52,23 @@
     "price": "8000",
     "thumbnail": "https://i.pinimg.com/originals/d1/12/aa/d112aa4dcea012815b22fd294f073f33.jpg",
     "id": 8
+  },
+  {
+    "title": "Ac/Dc",
+    "price": "5000",
+    "thumbnail": "https://i.pinimg.com/originals/d1/12/aa/d112aa4dcea012815b22fd294f073f33.jpg",
+    "id": 9
+  },
+  {
+    "title": "Corazon Negro",
+    "price": "5000",
+    "thumbnail": "https://w0.peakpx.com/wallpaper/782/354/HD-wallpaper-36-crazyfists-red-skeleton-death-rock-music-band-black-dark-heart.jpg",
+    "id": 10
+  },
+  {
+    "title": "hola",
+    "price": "3000",
+    "thumbnail": "https://i.pinimg.com/originals/d1/12/aa/d112aa4dcea012815b22fd294f073f33.jpg",
+    "id": 11
   }
 ]

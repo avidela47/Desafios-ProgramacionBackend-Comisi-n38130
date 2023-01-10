@@ -22,7 +22,7 @@ export default {
             host: 'localhost',
             user: 'coderhouse',
             password: 'coderhouse',
-            database: 'coderhouse'
+            database: 'ecommerce'
         }
     },
     fileSystem: {
