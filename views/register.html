@@ -13,19 +13,22 @@
 <body>
     <div class="container mt-3">
         <div class="jumbotron">
-            <h1>Login de Usuario</h1>
+            <h1>REGISTER</h1>
             <br>
-            <form action="/login" method="post" autocomplete="off">
+            <form action="/register" method="post" role="form" autocomplete="off">
                 <div class="form-group">
-                    <label for="username">Ingrese su email</label>
-                    <input id="username" name='username' placeholder="email" class="form-control" type="email" required>
-                    <label for="password">Ingrese su password</label>
-                    <input id="password" name='password' placeholder="password" class="form-control" type="password" required>
+                <label for="username">Ingrese su email</label>
+                <input id="username" name='username' placeholder="email" class="form-control" type="email" required>
+                <label for="password">Ingrese su password</label>
+                <input id="password" name='password' placeholder="password" class="form-control" type="password"
+                    required>
                 </div>
-                <button class="btn btn-success mt-3">Enviar</button>
+                <input type="submit" value="Register" class="btn btn-success mt-3">
+
             </form>
+
             <hr>
-            <button onclick="location.href = '/register'" class="btn btn-success mt-3">Ir a Register</button>
+            <button onclick="location.href = '/login'" class="btn btn-success mt-3">Ir a Login</button>
         </div>
     </div>
 </body>

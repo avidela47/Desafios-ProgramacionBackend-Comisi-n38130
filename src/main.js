@@ -1,6 +1,7 @@
 import express from 'express'
+import mongoose from 'mongoose'
 
-import options from './connection/options.js'
+import config from './connection/options.js'
 
 import { Server as HttpServer } from 'http'
 import { Server as Socket } from 'socket.io'
@@ -11,11 +12,21 @@ import productosApiRouter from './routers/api/productos.js'
 
 import addProductosHandlers from './routers/ws/productos.js'
 import addMensajesHandlers from './routers/ws/mensajes.js'
-//TO DO: Importar el session-mongo------------------------actualizado-*+++*------------------
-import session from 'express-session'
-import MongoStore from 'connect-mongo'
 
-//---------------------------------------------------------------*+++*--
+//---------------------------------------------
+// Connect Mongo
+
+const conectarDB = (url, cb) => {
+    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+        if (cb != null) {
+            cb(err);
+        }
+    } );
+}
+
+//---------------------------------------------
+
+//--------------------------------------------
 // instancio servidor, socket y api
 
 const app = express()
@@ -41,24 +52,6 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
 
-
-//Configurar el session------------------------actualizado-*+++*------------------
-app.use(session({
-    //Configuracion con Mongo de forma local
-    //  store: MongoStore.create({ mongoUrl: options.mongoLocal.cnxStr }),
-    //Configuracion con mongo Atlas
-   store: MongoStore.create({ mongoUrl: options.mongoRemote.cnxStr }),
-    secret: 'shhhhhhhhhhhhhhhhhhhhh',
-    resave: false,
-    saveUninitialized: false,
-    rolling: true,
-    cookie: {
-        maxAge: 60000
-    }
-}))
-
-//-------------------------------------------------------------*+++*------------------
-
 //--------------------------------------------
 // rutas del servidor API REST
 
@@ -73,10 +66,16 @@ app.use(homeWebRouter)
 //--------------------------------------------
 // inicio el servidor
 
-const connectedServer = httpServer.listen(options.PORT, () => {
-    console.log(`Servidor http escuchando en el puerto ${connectedServer.address().port}`)
-})
-connectedServer.on('error', error => console.log(`Error en servidor ${error}`))
+conectarDB( config.mongoRemote.cnxStr, err => {
+    if (err) return console.log('Error al conectarse a mongo');
+
+    console.log('BD conectada correctamente');
+
+    const connectedServer = httpServer.listen(config.PORT, () => {
+        console.log(`Servidor http escuchando en el puerto ${connectedServer.address().port}`)
+    })
+    connectedServer.on('error', error => console.log(`Error en servidor ${error}`))
+});
 
 
 
